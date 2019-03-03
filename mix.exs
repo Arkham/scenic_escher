@@ -5,7 +5,7 @@ defmodule ScenicEscher.MixProject do
     [
       app: :scenic_escher,
       version: "0.1.0",
-      elixir: "~> 1.7",
+      elixir: "~> 1.8",
       build_embedded: true,
       start_permanent: Mix.env() == :prod,
       deps: deps()
