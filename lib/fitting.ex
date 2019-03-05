@@ -26,6 +26,15 @@ defmodule Fitting do
 
           {:polyline, points} ->
             {:polyline, Enum.map(points, fn point -> mapper(box, point) end)}
+
+          {:curve, {v1, v2, v3, v4}} ->
+            {:curve,
+             {
+               mapper(box, v1),
+               mapper(box, v2),
+               mapper(box, v3),
+               mapper(box, v4)
+             }}
         end)
         |> Enum.map(fn shape ->
           {shape, %{stroke: {stroke_width, :black}}}

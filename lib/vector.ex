@@ -6,16 +6,15 @@ defmodule Vector do
   defstruct x: 0, y: 0
 
   @doc """
-  Hello world.
+  Builds a vector.
 
   ## Examples
 
-      iex> Vector.hello
-      :world
-
+      iex> Vector.build(0, 1)
+      %Vector{x: 0, y: 1}
   """
-  def hello do
-    :world
+  def build(x, y) do
+    %Vector{x: x, y: y}
   end
 
   @doc """

@@ -19,6 +19,13 @@ defmodule Rendering do
             Enum.map(rest, fn %{x: x, y: y} -> {:line_to, x, y} end)
 
         {result, style}
+
+      {{:curve, {v1, v2, v3, v4}}, style} ->
+        {[
+           :begin,
+           {:move_to, v1.x, v1.y},
+           {:bezier_to, v2.x, v2.y, v3.x, v3.y, v4.x, v4.y}
+         ], style}
     end)
   end
 
@@ -32,5 +39,13 @@ defmodule Rendering do
 
   def mirror_shape(height, {:polyline, points}) do
     {:polyline, Enum.map(points, &mirror_vector(height, &1))}
+  end
+
+  def mirror_shape(height, {:curve, {v1, v2, v3, v4}}) do
+    v1_ = mirror_vector(height, v1)
+    v2_ = mirror_vector(height, v2)
+    v3_ = mirror_vector(height, v3)
+    v4_ = mirror_vector(height, v4)
+    {:curve, {v1_, v2_, v3_, v4_}}
   end
 end
