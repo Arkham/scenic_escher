@@ -23,23 +23,26 @@ defmodule Fitting do
         |> Enum.map(fn
           {:polygon, points} ->
             {:polygon, Enum.map(points, fn point -> mapper(box, point) end)}
+
+          {:polyline, points} ->
+            {:polyline, Enum.map(points, fn point -> mapper(box, point) end)}
         end)
         |> Enum.map(fn shape ->
           {shape, %{stroke: {stroke_width, :black}}}
         end)
 
       box_lines = [
-        {{:polygon,
+        {{:polyline,
           [
             a,
             %Vector{x: 0.0, y: 0.0}
           ]}, %{stroke: {stroke_width, :red}}},
-        {{:polygon,
+        {{:polyline,
           [
             a,
             Vector.add(a, b)
           ]}, %{stroke: {stroke_width, :orange}}},
-        {{:polygon,
+        {{:polyline,
           [
             a,
             Vector.add(a, c)

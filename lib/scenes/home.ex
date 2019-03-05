@@ -20,7 +20,7 @@ defmodule ScenicEscher.Scene.Home do
 
              {width, height} = Box.dimensions(box)
 
-             shapes = [Letter.f()]
+             shapes = Shape.george
 
              picture = Fitting.create_picture(shapes)
 

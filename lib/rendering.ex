@@ -12,6 +12,13 @@ defmodule Rendering do
             [:close_path]
 
         {result, style}
+
+      {{:polyline, [first | rest]}, style} ->
+        result =
+          [:begin, {:move_to, first.x, first.y}] ++
+            Enum.map(rest, fn %{x: x, y: y} -> {:line_to, x, y} end)
+
+        {result, style}
     end)
   end
 
@@ -21,5 +28,9 @@ defmodule Rendering do
 
   def mirror_shape(height, {:polygon, points}) do
     {:polygon, Enum.map(points, &mirror_vector(height, &1))}
+  end
+
+  def mirror_shape(height, {:polyline, points}) do
+    {:polyline, Enum.map(points, &mirror_vector(height, &1))}
   end
 end
