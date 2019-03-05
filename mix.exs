@@ -24,7 +24,8 @@ defmodule ScenicEscher.MixProject do
   defp deps do
     [
       {:scenic, "~> 0.9"},
-      {:scenic_driver_glfw, "~> 0.9", targets: :host}
+      {:scenic_driver_glfw, "~> 0.9", targets: :host},
+      {:exsync, git: "https://github.com/Arkham/exsync", branch: "support-escher", only: :dev}
     ]
   end
 end

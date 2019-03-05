@@ -9,6 +9,7 @@ defmodule ScenicEscher do
 
     # start the application with the viewport
     children = [
+      ScenicEscher.Refresher,
       {Scenic, viewports: [main_viewport_config]}
     ]
 

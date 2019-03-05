@@ -1,5 +1,7 @@
 %{
   "elixir_make": {:hex, :elixir_make, "0.5.2", "96a28c79f5b8d34879cd95ebc04d2a0d678cfbbd3e74c43cb63a76adf0ee8054", [:mix], [], "hexpm"},
+  "exsync": {:git, "https://github.com/Arkham/exsync", "7d35547a27ada1c0a8bcf679cb9a1ccf42db9c36", [branch: "support-escher"]},
+  "file_system": {:hex, :file_system, "0.2.6", "fd4dc3af89b9ab1dc8ccbcc214a0e60c41f34be251d9307920748a14bf41f1d3", [:mix], [], "hexpm"},
   "scenic": {:hex, :scenic, "0.9.0", "129594f918b4e2dd97465b95b4fb3582294ac6bb3e931f12edd09913743964eb", [:make, :mix], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm"},
   "scenic_driver_glfw": {:hex, :scenic_driver_glfw, "0.9.1", "b64d345929007186c6b2ca603aec21b1fdde758d3eb32f8467a236e58ccd6a19", [:make, :mix], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}, {:scenic, "~> 0.9", [hex: :scenic, repo: "hexpm", optional: false]}], "hexpm"},
 }

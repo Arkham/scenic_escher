@@ -5,10 +5,6 @@ defmodule ScenicEscher.Scene.Home do
 
   import Scenic.Primitives
 
-  @note """
-    Hello World!
-  """
-
   @graph Graph.build(font: :roboto, font_size: 24, theme: :light)
          |> group(
            fn g ->
@@ -20,7 +16,11 @@ defmodule ScenicEscher.Scene.Home do
 
              {width, height} = Box.dimensions(box)
 
-             george = Fitting.create_picture(Figure.george())
+             george =
+               Fitting.create_picture(
+                 Figure.george(),
+                 debug: true
+               )
 
              atom =
                Picture.above(
@@ -54,10 +54,9 @@ defmodule ScenicEscher.Scene.Home do
                box
                |> picture.()
                |> Rendering.to_paths({width, height})
-               |> IO.inspect()
 
              initial = g
-             # |> text(@note, fill: :black, translate: {20, 40})
+             # |> text("Hello!", fill: :black, translate: {20, 40})
 
              paths
              |> Enum.reduce(initial, fn {elem, options}, acc ->
@@ -69,6 +68,7 @@ defmodule ScenicEscher.Scene.Home do
          )
 
   def init(_, _) do
+    Process.register(self(), __MODULE__)
     push_graph(@graph)
     {:ok, @graph}
   end
