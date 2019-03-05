@@ -12,4 +12,52 @@ defmodule Box do
   def dimensions(%Box{a: a, b: b, c: c}) do
     {a.x + b.x, a.y + c.y}
   end
+
+  def turn(%Box{a: a, b: b, c: c}) do
+    %Box{a: Vector.add(a, b), b: c, c: Vector.neg(b)}
+  end
+
+  def flip(%Box{a: a, b: b, c: c}) do
+    %Box{a: Vector.add(a, c), b: b, c: Vector.neg(c)}
+  end
+
+  def split_horizontally(factor, %Box{a: a, b: b, c: c}) do
+    above_ratio = factor
+
+    below_ratio = 1 - above_ratio
+
+    above = %Box{
+      a: Vector.add(a, Vector.scale(below_ratio, c)),
+      b: b,
+      c: Vector.scale(above_ratio, c)
+    }
+
+    below = %Box{
+      a: a,
+      b: b,
+      c: Vector.scale(below_ratio, c)
+    }
+
+    {above, below}
+  end
+
+  def split_vertically(factor, %Box{a: a, b: b, c: c}) do
+    left_ratio = factor
+
+    right_ratio = 1 - left_ratio
+
+    left = %Box{
+      a: a,
+      b: Vector.scale(left_ratio, b),
+      c: c
+    }
+
+    right = %Box{
+      a: Vector.add(a, Vector.scale(left_ratio, b)),
+      b: Vector.scale(right_ratio, b),
+      c: c
+    }
+
+    {left, right}
+  end
 end

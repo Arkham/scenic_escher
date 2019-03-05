@@ -14,15 +14,41 @@ defmodule ScenicEscher.Scene.Home do
            fn g ->
              box = %Box{
                a: %Vector{x: 75.0, y: 75.0},
-               b: %Vector{x: 250.0, y: 0.0},
-               c: %Vector{x: 0.0, y: 250.0}
+               b: %Vector{x: 500.0, y: 0.0},
+               c: %Vector{x: 0.0, y: 500.0}
              }
 
              {width, height} = Box.dimensions(box)
 
-             shapes = Shape.george
+             george = Fitting.create_picture(Figure.george())
 
-             picture = Fitting.create_picture(shapes)
+             atom =
+               Picture.above(
+                 george,
+                 george |> Picture.turn() |> Picture.turn()
+               )
+
+             molecule =
+               Picture.beside(
+                 atom,
+                 atom |> Picture.flip()
+               )
+
+             simple =
+               Picture.quartet(
+                 molecule,
+                 molecule,
+                 molecule,
+                 molecule
+               )
+
+             picture =
+               Picture.quartet(
+                 simple,
+                 simple,
+                 simple,
+                 simple
+               )
 
              paths =
                box
@@ -42,10 +68,6 @@ defmodule ScenicEscher.Scene.Home do
            translate: {20, 20}
          )
 
-  # ============================================================================
-  # setup
-
-  # --------------------------------------------------------
   def init(_, _) do
     push_graph(@graph)
     {:ok, @graph}

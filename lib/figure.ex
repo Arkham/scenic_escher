@@ -1,4 +1,4 @@
-defmodule Shape do
+defmodule Figure do
   def george do
     pts1 = [
       %Vector{x: 0.00, y: 0.55},
