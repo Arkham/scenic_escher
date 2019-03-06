@@ -21,6 +21,14 @@ defmodule Box do
     %Box{a: Vector.add(a, c), b: b, c: Vector.neg(c)}
   end
 
+  def toss(%Box{a: a, b: b, c: c}) do
+    %Box{
+      a: Vector.add(a, Vector.scale(0.5, Vector.add(b, c))),
+      b: Vector.scale(0.5, Vector.add(b, c)),
+      c: Vector.scale(0.5, Vector.add(c, Vector.neg(b)))
+    }
+  end
+
   def split_horizontally(factor, %Box{a: a, b: b, c: c}) do
     above_ratio = factor
 

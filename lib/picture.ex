@@ -34,6 +34,14 @@ defmodule Picture do
     end
   end
 
+  def toss(picture) do
+    fn box ->
+      box
+      |> Box.toss()
+      |> picture.()
+    end
+  end
+
   def above_ratio(m, n, p1, p2) do
     fn box ->
       factor = m / (m + n)
@@ -67,5 +75,44 @@ defmodule Picture do
       beside(p1, p2),
       beside(p3, p4)
     )
+  end
+
+  def over(p1, p2) do
+    fn box ->
+      p1.(box) ++ p2.(box)
+    end
+  end
+
+  def over(list) when is_list(list) do
+    fn box ->
+      Enum.flat_map(list, fn elem ->
+        elem.(box)
+      end)
+    end
+  end
+
+  def ttile(fish) do
+    fn box ->
+      side = fish |> toss |> flip
+
+      over([
+        fish,
+        side |> turn,
+        side |> turn |> turn
+      ]).(box)
+    end
+  end
+
+  def utile(fish) do
+    fn box ->
+      side = fish |> toss |> flip
+
+      over([
+        side,
+        side |> turn,
+        side |> turn |> turn,
+        side |> turn |> turn |> turn
+      ]).(box)
+    end
   end
 end

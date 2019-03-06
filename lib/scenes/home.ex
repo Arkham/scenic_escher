@@ -10,19 +10,33 @@ defmodule ScenicEscher.Scene.Home do
            fn g ->
              box = %Box{
                a: %Vector{x: 75.0, y: 75.0},
-               b: %Vector{x: 300.0, y: 0.0},
-               c: %Vector{x: 0.0, y: 300.0}
+               b: %Vector{x: 500.0, y: 0.0},
+               c: %Vector{x: 0.0, y: 500.0}
              }
 
              {width, height} = Box.dimensions(box)
 
              fish =
                Fitting.create_picture(
-                 Fishy.fish_shapes(),
-                 debug: true
+                 Fishy.fish_shapes()
+                 # debug: true
                )
 
-             picture = fish
+             atom =
+               Picture.quartet(
+                 Picture.ttile(fish),
+                 Picture.ttile(fish) |> Picture.turn(),
+                 Picture.ttile(fish) |> Picture.turn() |> Picture.turn() |> Picture.turn(),
+                 Picture.ttile(fish) |> Picture.turn() |> Picture.turn()
+               )
+
+             picture =
+               Picture.quartet(
+                 atom,
+                 atom,
+                 atom,
+                 atom
+               )
 
              paths =
                box
@@ -38,7 +52,7 @@ defmodule ScenicEscher.Scene.Home do
                |> path(elem, options)
              end)
            end,
-           translate: {20, 20}
+           translate: {20, 60}
          )
 
   def init(_, _) do

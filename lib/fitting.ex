@@ -7,7 +7,8 @@ defmodule Fitting do
   end
 
   def get_stroke_width(%Box{b: b, c: c}) do
-    max(Vector.length(b), Vector.length(c)) / 100.0
+    ratio = max(Vector.length(b), Vector.length(c)) / 100.0
+    max(ratio, 1.0)
   end
 
   def create_picture(shapes, options \\ []) do
