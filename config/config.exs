@@ -5,7 +5,7 @@ use Mix.Config
 # Configure the main viewport for the Scenic application
 config :scenic_escher, :viewport, %{
   name: :main_viewport,
-  size: {700, 600},
+  size: {700, 650},
   default_scene: {ScenicEscher.Scene.Home, nil},
   drivers: [
     %{

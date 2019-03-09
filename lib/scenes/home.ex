@@ -22,20 +22,10 @@ defmodule ScenicEscher.Scene.Home do
                  # debug: true
                )
 
-             atom =
-               Picture.quartet(
-                 Picture.ttile(fish),
-                 Picture.ttile(fish) |> Picture.turn(),
-                 Picture.ttile(fish) |> Picture.turn() |> Picture.turn() |> Picture.turn(),
-                 Picture.ttile(fish) |> Picture.turn() |> Picture.turn()
-               )
-
              picture =
-               Picture.quartet(
-                 atom,
-                 atom,
-                 atom,
-                 atom
+               Picture.square_limit(
+                 5,
+                 fish
                )
 
              paths =

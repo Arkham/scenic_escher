@@ -115,4 +115,73 @@ defmodule Picture do
       ]).(box)
     end
   end
+
+  def nonet(p1, p2, p3, p4, p5, p6, p7, p8, p9) do
+    above_ratio(
+      1,
+      2,
+      beside_ratio(1, 2, p1, beside(p2, p3)),
+      above(
+        beside_ratio(1, 2, p4, beside(p5, p6)),
+        beside_ratio(1, 2, p7, beside(p8, p9))
+      )
+    )
+  end
+
+  def side(0, _fish), do: fn _ -> [] end
+
+  def side(n, fish) when n > 0 do
+    fn box ->
+      quartet(
+        side(n - 1, fish),
+        side(n - 1, fish),
+        turn(ttile(fish)),
+        ttile(fish)
+      ).(box)
+    end
+  end
+
+  def corner(0, _fish), do: fn _ -> [] end
+
+  def corner(n, fish) when n > 0 do
+    fn box ->
+      quartet(
+        corner(n - 1, fish),
+        side(n - 1, fish),
+        side(n - 1, fish) |> turn,
+        utile(fish)
+      ).(box)
+    end
+  end
+
+  def square_limit(0, _fish), do: fn _ -> [] end
+
+  def square_limit(n, fish) when n > 0 do
+    fn box ->
+      corner = corner(n - 1, fish)
+      side = side(n - 1, fish)
+
+      nw = corner
+      nc = side
+      ne = corner |> turn |> turn |> turn
+      mw = side |> turn
+      mc = utile(fish)
+      me = side |> turn |> turn |> turn
+      sw = corner |> turn
+      sc = side |> turn |> turn
+      se = corner |> turn |> turn
+
+      nonet(
+        nw,
+        nc,
+        ne,
+        mw,
+        mc,
+        me,
+        sw,
+        sc,
+        se
+      ).(box)
+    end
+  end
 end
