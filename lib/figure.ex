@@ -1,4 +1,15 @@
 defmodule Figure do
+  def triangle do
+    [
+      {:polygon,
+       [
+         %Vector{x: 0.00, y: 0.00},
+         %Vector{x: 1.00, y: 0.00},
+         %Vector{x: 0.00, y: 1.00}
+       ]}
+    ]
+  end
+
   def george do
     pts1 = [
       %Vector{x: 0.00, y: 0.55},
