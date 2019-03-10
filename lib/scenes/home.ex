@@ -8,38 +8,30 @@ defmodule ScenicEscher.Scene.Home do
   @graph Graph.build(font: :roboto, font_size: 24, theme: :light)
          |> group(
            fn g ->
+             # We create a box
              box = %Box{
-               a: %Vector{x: 75.0, y: 75.0},
-               b: %Vector{x: 500.0, y: 0.0},
-               c: %Vector{x: 0.0, y: 500.0}
+               a: Vector.build(75.0, 75.0),
+               b: Vector.build(500.0, 0.0),
+               c: Vector.build(0.0, 500.0)
              }
 
-             {width, height} = Box.dimensions(box)
+             # We create a fish
+             fish = Fitting.create_picture(Fishy.fish_shapes())
 
-             fish =
-               Fitting.create_picture(
-                 Fishy.fish_shapes()
-                 # debug: true
-               )
+             # Then we compose the fish in a square limit
+             picture = Picture.square_limit(5, fish)
 
-             picture =
-               Picture.square_limit(
-                 5,
-                 fish
-               )
-
+             # We run the picture function and obtain some points.
+             # Then we convert them to scenic-friendly data.
              paths =
                box
                |> picture.()
-               |> Rendering.to_paths({width, height})
+               |> Rendering.to_paths(Box.dimensions(box))
 
-             initial = g
-             # |> text("Hello!", fill: :black, translate: {20, 40})
-
+             # We draw the paths using scenic
              paths
-             |> Enum.reduce(initial, fn {elem, options}, acc ->
-               acc
-               |> path(elem, options)
+             |> Enum.reduce(g, fn {elem, options}, acc ->
+               path(acc, elem, options)
              end)
            end,
            translate: {20, 60}

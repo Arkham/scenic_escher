@@ -40,7 +40,7 @@ defmodule Fitting do
       {{:polyline,
         [
           a,
-          %Vector{x: 0.0, y: 0.0}
+          Vector.build(0, 0)
         ]}, %{stroke: {stroke_width, :red}}},
       {{:polyline,
         [

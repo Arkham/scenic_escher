@@ -22,12 +22,12 @@ defmodule Vector do
 
   ## Examples
 
-      iex> Vector.add(%Vector{x: 1, y: 1}, %Vector{x: 3, y: 4})
+      iex> Vector.add(Vector.build(1, 1), Vector.build(3, 4))
       %Vector{x: 4, y: 5}
 
   """
   def add(%{x: x1, y: y1}, %{x: x2, y: y2}) do
-    %Vector{x: x1 + x2, y: y1 + y2}
+    build(x1 + x2, y1 + y2)
   end
 
   @doc """
@@ -35,12 +35,12 @@ defmodule Vector do
 
   ## Examples
 
-      iex> Vector.neg(%Vector{x: 1, y: 1})
+      iex> Vector.neg(Vector.build(1, 1))
       %Vector{x: -1, y: -1}
 
   """
   def neg(%{x: x, y: y}) do
-    %Vector{x: -x, y: -y}
+    build(-x, -y)
   end
 
   @doc """
@@ -48,7 +48,7 @@ defmodule Vector do
 
   ## Examples
 
-      iex> Vector.sub(%Vector{x: 1, y: 1}, %Vector{x: 3, y: 4})
+      iex> Vector.sub(Vector.build(1, 1), Vector.build(3, 4))
       %Vector{x: -2, y: -3}
 
   """
@@ -61,12 +61,12 @@ defmodule Vector do
 
   ## Examples
 
-      iex> Vector.scale(1.5, %Vector{x: 2, y: 3})
+      iex> Vector.scale(1.5, Vector.build(2, 3))
       %Vector{x: 3.0, y: 4.5}
 
   """
   def scale(ratio, %{x: x, y: y}) do
-    %Vector{x: ratio * x, y: ratio * y}
+    build(ratio * x, ratio * y)
   end
 
   @doc """
@@ -74,7 +74,7 @@ defmodule Vector do
 
   ## Examples
 
-      iex> Vector.length(%Vector{x: 3, y: 4})
+      iex> Vector.length(Vector.build(3, 4))
       5.0
 
   """

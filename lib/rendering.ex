@@ -33,7 +33,7 @@ defmodule Rendering do
 
   def mirror(height) do
     fn %Vector{x: x, y: y} ->
-      %Vector{x: x, y: height - y}
+      Vector.build(x, height - y)
     end
   end
 end
