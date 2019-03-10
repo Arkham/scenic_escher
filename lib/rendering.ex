@@ -1,8 +1,10 @@
 defmodule Rendering do
   def to_paths(styled_shapes, {_width, height}) do
+    mirror_fn = mirror(height)
+
     styled_shapes
     |> Enum.map(fn {shape, style} ->
-      {mirror_shape(height, shape), style}
+      {Shape.map_vectors(shape, mirror_fn), style}
     end)
     |> Enum.map(fn
       {{:polygon, [first | rest]}, style} ->
@@ -29,23 +31,9 @@ defmodule Rendering do
     end)
   end
 
-  def mirror_vector(height, %Vector{x: x, y: y}) do
-    %Vector{x: x, y: height - y}
-  end
-
-  def mirror_shape(height, {:polygon, points}) do
-    {:polygon, Enum.map(points, &mirror_vector(height, &1))}
-  end
-
-  def mirror_shape(height, {:polyline, points}) do
-    {:polyline, Enum.map(points, &mirror_vector(height, &1))}
-  end
-
-  def mirror_shape(height, {:curve, {v1, v2, v3, v4}}) do
-    v1_ = mirror_vector(height, v1)
-    v2_ = mirror_vector(height, v2)
-    v3_ = mirror_vector(height, v3)
-    v4_ = mirror_vector(height, v4)
-    {:curve, {v1_, v2_, v3_, v4_}}
+  def mirror(height) do
+    fn %Vector{x: x, y: y} ->
+      %Vector{x: x, y: height - y}
+    end
   end
 end

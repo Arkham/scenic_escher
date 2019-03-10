@@ -1,6 +1,6 @@
 defmodule Vector do
   @moduledoc """
-  Describes a two dimensional vector that connects the origin to a point (x, y)
+  Describes a two dimensional vector that connects the origin to (x, y)
   """
 
   defstruct x: 0, y: 0
@@ -80,24 +80,5 @@ defmodule Vector do
   """
   def length(%{x: x, y: y}) do
     :math.sqrt(x * x + y * y)
-  end
-
-  @doc """
-  Converts a Vector to a string using a certain separator.
-
-  ## Examples
-
-      iex> Vector.to_string_with(%Vector{x: 3, y: 4}, ",")
-      "3,4"
-
-  """
-  def to_string_with(%{x: x, y: y}, separator) do
-    "#{x}#{separator}#{y}"
-  end
-
-  defimpl String.Chars, for: Vector do
-    def to_string(vector) do
-      Vector.to_string_with(vector, ",")
-    end
   end
 end
