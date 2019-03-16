@@ -93,12 +93,12 @@ defmodule Picture do
 
   def ttile(fish) do
     fn box ->
-      side = fish |> toss |> flip
+      side = fish |> toss
 
       over([
         fish,
-        side |> turn,
-        side |> turn |> turn
+        side |> flip,
+        side |> turn |> flip
       ]).(box)
     end
   end

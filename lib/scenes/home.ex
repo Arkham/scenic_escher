@@ -4,6 +4,7 @@ defmodule ScenicEscher.Scene.Home do
   alias Scenic.Graph
 
   import Scenic.Primitives
+  import Picture
 
   @graph Graph.build(font: :roboto, font_size: 24, theme: :light)
          |> group(
@@ -11,8 +12,8 @@ defmodule ScenicEscher.Scene.Home do
              # We create a box
              box = %Box{
                a: Vector.build(75.0, 75.0),
-               b: Vector.build(500.0, 0.0),
-               c: Vector.build(0.0, 500.0)
+               b: Vector.build(400.0, 0.0),
+               c: Vector.build(0.0, 400.0)
              }
 
              # We create a fish
@@ -34,7 +35,7 @@ defmodule ScenicEscher.Scene.Home do
                path(acc, elem, options)
              end)
            end,
-           translate: {20, 60}
+           translate: {75, 75}
          )
 
   def init(_, _) do

@@ -18,7 +18,7 @@ defmodule Box do
   end
 
   def flip(%Box{a: a, b: b, c: c}) do
-    %Box{a: Vector.add(a, c), b: b, c: Vector.neg(c)}
+    %Box{a: Vector.add(a, b), b: Vector.neg(b), c: c}
   end
 
   def toss(%Box{a: a, b: b, c: c}) do
